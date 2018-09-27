@@ -1,0 +1,25 @@
+.Ishop{
+    border: 1px solid #ccc;
+    font: 14px Arial;
+}
+.Ishop .flex{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+.Ishop .flex:last-child{
+    border:none;
+}
+.Ishop .flex .flex-col{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 7px;
+}
+.Ishop span.price.flex-col,
+.Ishop span.available.flex-col,
+.Ishop span.name.flex-col{
+    width: 20%;
+    display: inline-flex;
+}
