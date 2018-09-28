@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ishop</title>
+</head>
+<body>
+    <div id="container"></div> 
+      
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+    <!-- <script src="../react.js"></script>
+    <script src="../react-dom.js"></script> -->
+        
+    <script src="IshopBlock.js"></script>
+    <script src="IshopGood.js"></script>
+    <link rel="stylesheet" type="text/css" href="ishop.css" />
+    <script>
+        var goodsArr = [
+            {name : 'NAME', code: 0, price : 'PRICE', URL : 'URL', available : 'AVAILABLE' },
+            {name : 'pointe', code: 1, price : 100, URL : 'https://image.discountdance.net/image/1395x1860/sd16_1.jpg', available : 3 },
+            {name : 'swimsuit', code: 2, price : 80, URL : 'https://asda.scene7.com/is/image/Asda/5054924782851?hei=560&qlt=85&fmt=pjpg&resmode=sharp&op_usm=1.1,0.5,0,0&defaultimage=default_details_George_rd', available : 33 },
+            {name : 'ballet shoes', code: 3, price : 50, URL : 'https://images.by.prom.st/86028307_w200_h200_40e15bdbf38b48__ab88203c94.jpg', available : 10 },
+        ];
+
+        ReactDOM.render(
+            React.createElement(IshopBlock, {goods : goodsArr}),
+            document.getElementById('container')
+        );
+    </script>
+</body>
+</html>
