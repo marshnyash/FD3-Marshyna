@@ -17,14 +17,13 @@ var IshopBlock = React.createClass({
                     React.PropTypes.number
                 ]),
             })
-        ),
-        
+        )
     },
     
     getInitialState: function() {
         return { 
             selectedGoodCode: null,
-            selectedGoodCodeDelete: null
+            goodsArr : this.props.goods
         };
     },
 
@@ -32,24 +31,15 @@ var IshopBlock = React.createClass({
         console.log('выбран товар с кодом: ', code);
         this.setState({selectedGoodCode: code});
     },
-    goodSelectedDelete: function(code){
-
-        console.log('кодом BUTTON: ', code);
-        this.setState({selectedGoodCodeDelete: code});
-        console.log('selectedGoodCodeDelete: ', this.state.selectedGoodCodeDelete);
-
-        var isConfirm = confirm("Are you sure you wish to delete this item?");
-        console.log('isConfirm: ',isConfirm);
-        var filteredGoods = this.props.goods.filter((item) => {
-            console.log('code ?== selectedGoodCodeDelete: ', item.code == this.state.selectedGoodCodeDelete);
-            return item;
-        })
-        console.log('filteredGoods ',filteredGoods);
-        
+    deleteGood: function(code){
+        var goodsArrFiltered = this.state.goodsArr.filter( item => {
+            return item.code != code;
+        });
+        this.setState({goodsArr: [...goodsArrFiltered]})
     },
 
     render: function() {
-        var goodsCode = this.props.goods.map( item =>
+        var goodsArrRender = this.state.goodsArr.map( item =>
             React.createElement(IshopGood, {
                 key: item.code,
                 name: item.name,
@@ -58,15 +48,12 @@ var IshopBlock = React.createClass({
                 URL: item.URL,
                 available: item.available,
                 cbClicked: this.goodSelected,
-                cbGoodClickedDelete: this.goodSelectedDelete,
-                selectedGoodCode: this.state.selectedGoodCode,
-                selectedGoodCodeDelete: this.state.selectedGoodCodeDelete
-
+                cbGoodClickedDelete: this.deleteGood,
+                selectedGoodCode: this.state.selectedGoodCode
             })
         );
-        
         return React.DOM.div({className:'Ishop'}, 
-                React.DOM.div( {className:'Goods'}, goodsCode ));
-
-    },
+            React.DOM.div( {className:'Goods'}, goodsArrRender)
+        )
+    }
 });
