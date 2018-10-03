@@ -29,31 +29,27 @@ var IshopGood = React.createClass({
     },
 
     render: function() {
-        return React.DOM.div( {className:'Ishop'},
-        this.props.selectedGoodCode!=this.props.code 
-            ? React.DOM.div({
-                className: 'good flex', 
+        return this.props.selectedGoodCode!=this.props.code 
+            ? React.DOM.tr({
+                className: 'Ishop good flex', 
                 onClick: this.goodClicked
             },
-                React.DOM.span({className:'name flex-col'},this.props.name),
-                React.DOM.span({className:'price flex-col'},this.props.price),
-                React.DOM.span({className:'url flex-col'},this.props.URL),
-                React.DOM.span({className:'available flex-col'},this.props.available),
-                React.DOM.span({className:'button'}, React.DOM.button({onClick: this.clickedDelete}, "Delete" ))
+                React.DOM.td({className:'name flex-col'},this.props.name),
+                React.DOM.td({className:'price flex-col'},this.props.price),
+                React.DOM.td({className:'url flex-col'},this.props.URL),
+                React.DOM.td({className:'available flex-col'},this.props.available),
+                React.DOM.td({className:'button'}, React.DOM.button({onClick: this.clickedDelete}, "Delete" ))
             )
-            : React.DOM.div({
+            : React.DOM.tr({
                 className: 'good flex activeBg', 
                 onClick: this.goodClicked
             },
-                React.DOM.span({className:'name flex-col'},this.props.name),
-                React.DOM.span({className:'price flex-col'},this.props.price),
-                React.DOM.span({className:'url flex-col'},this.props.URL),
-                React.DOM.span({className:'available flex-col'},this.props.available),
-                React.DOM.span({className:'button'}, React.DOM.button({onClick: this.clickedDelete}, "Delete" ))
+                React.DOM.td({className:'name flex-col'},this.props.name),
+                React.DOM.td({className:'price flex-col'},this.props.price),
+                React.DOM.td({className:'url flex-col'},this.props.URL),
+                React.DOM.td({className:'available flex-col'},this.props.available),
+                React.DOM.td({className:'button'}, React.DOM.button({onClick: this.clickedDelete}, "Delete" ))
             )
-            
-        
-        )    
         
 
     },

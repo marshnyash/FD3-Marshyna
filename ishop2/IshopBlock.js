@@ -53,7 +53,15 @@ var IshopBlock = React.createClass({
             })
         );
         return React.DOM.div({className:'Ishop'}, 
-            React.DOM.div( {className:'Goods'}, goodsArrRender)
+            React.DOM.table( {className:'Goods'}, 
+                React.DOM.tr({className: 'good flex'},
+                React.DOM.th({className:'name flex-col'},"Name"),
+                React.DOM.th({className:'price flex-col'},"Price"),
+                React.DOM.th({className:'url flex-col'},"URL"),
+                React.DOM.th({className:'available flex-col'},"Available"),
+                React.DOM.th({className:'button'}, "Delete" )
+            ),
+            goodsArrRender)
         )
     }
 });

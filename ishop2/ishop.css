@@ -1,44 +1,36 @@
-.Ishop{
+.Goods{
     border: 1px solid #ccc;
     font: 14px Arial;
+    border-collapse: separate;
+    border-spacing: 0;
 }
-.Ishop .flex{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    align-items: center;
-}
-.Ishop .flex:hover{
-    cursor: pointer;
-}
-.Ishop .flex:last-child{
-    border:none;
-}
-.Ishop .flex .flex-col{
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.Goods .flex .flex-col{
     padding: 7px;
 }
-.Ishop span.price.flex-col,
-.Ishop span.available.flex-col,
-.Ishop span.name.flex-col{
-    width: 20%;
-    display: inline-flex;
-
+.Goods .Ishop.flex:hover{
+    cursor: pointer;
 }
-.button button{
+.Goods .button button{
     width: 70px;
     height: 26px;
     margin: 7px;
     border-radius: 5px;
 }
-.button button:hover{
+.Goods .button button:hover{
     background: green;
     color: #fff;
     cursor: pointer;
 }
-.Ishop .activeBg{
+.Goods .activeBg{
     background: orange;
 }
+.Goods tr.good.flex td,
+.Goods tr.good.flex th {
+    border: 1px solid #ccc;
+    max-width: 330px;
+    min-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
