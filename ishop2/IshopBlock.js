@@ -7,15 +7,9 @@ var IshopBlock = React.createClass({
             React.PropTypes.shape({
                 name: React.PropTypes.string.isRequired,
                 code: React.PropTypes.number.isRequired,
-                price: React.PropTypes.oneOfType([
-                    React.PropTypes.string,
-                    React.PropTypes.number
-                ]),
+                price: React.PropTypes.number.isRequired,
                 URL: React.PropTypes.string.isRequired,
-                available: React.PropTypes.oneOfType([
-                    React.PropTypes.string,
-                    React.PropTypes.number
-                ]),
+                available: React.PropTypes.number.isRequired
             })
         )
     },
