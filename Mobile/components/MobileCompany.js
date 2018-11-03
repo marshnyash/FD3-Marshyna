@@ -128,8 +128,16 @@ class MobileCompany extends React.PureComponent {
     console.log("MobileCompany render");
 
     var clientsCode=this.state.changedListOfClients.map( client => {
-          let FIO={fam:client.fam, im:client.im, otch:client.otch};
-          return <MobileClient cbEdited={this.editClient} cbDeleted={this.deleteClient} key={client.id} id={client.id} FIO={FIO} balance={client.balance}/>;
+          // let FIO={fam:client.fam, im:client.im, otch:client.otch};
+          return (
+            <MobileClient 
+              cbEdited={this.editClient} 
+              cbDeleted={this.deleteClient} 
+              key={client.id} 
+              id={client.id} 
+              FIO={client} 
+              balance={client.balance}/>
+          )
         }
     );
     
