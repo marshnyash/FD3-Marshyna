@@ -81,6 +81,7 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
     getCount():number {
         return localStorage.length;
     }
+
 }
 
 
