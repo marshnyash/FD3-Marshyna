@@ -9,7 +9,6 @@ class Scales<StorageEngine extends IStorageEngine>{
     //метод add для добавления нового Storage на весы;
     add(prod:StorageEngine):void{
         this.arrayOfStorages.push(prod);
-        console.log("add", this.arrayOfStorages);
     } 
     //метод getSumScale для получения суммарного веса добавленных Продуктов;
     getSumScale():number{
@@ -67,6 +66,22 @@ class ScalesStorageEngineArray implements IStorageEngine{
     }
 }
 
+class ScalesStorageEngineLocalStorage implements IStorageEngine {
+
+    addItem(item:Product):void {
+        localStorage.setItem(item.getName(), JSON.stringify(item));
+    }
+
+    getItem(index:number):Product {
+        let elementName = localStorage.key(index);
+        let rawProduct = JSON.parse(localStorage.getItem(elementName));
+        return new Product(rawProduct.name, rawProduct.scale);
+    }
+
+    getCount():number {
+        return localStorage.length;
+    }
+}
 
 
 
@@ -76,6 +91,7 @@ let scales = new Scales<ScalesStorageEngineArray>();
  let apple2:Product = new Product("Apple green", 200); 
  let apple3:Product = new Product("Apple orange", 300); 
 
+ 
  let lykoshko:ScalesStorageEngineArray = new ScalesStorageEngineArray();
  lykoshko.addItem(apple);
  lykoshko.addItem(apple2);
@@ -86,8 +102,23 @@ let scales = new Scales<ScalesStorageEngineArray>();
  scales.getSumScale();
  scales.getNameList();
 
+ localStorage.clear();
+ let scales2 = new Scales<ScalesStorageEngineLocalStorage>();
 
+ let orange:Product = new Product("orange red", 100); 
+ let orange2:Product = new Product("orange green", 900); 
+ let orange3:Product = new Product("orange orange", 7000); 
+ 
+ let lykoshko2:ScalesStorageEngineLocalStorage = new ScalesStorageEngineLocalStorage();
 
+ lykoshko2.addItem(orange);
+ lykoshko2.addItem(orange2);
+ lykoshko2.addItem(orange3);
+
+ scales2.add(lykoshko2);
+
+ scales2.getSumScale();
+ scales2.getNameList();
  
 
 

@@ -5,7 +5,6 @@ var Scales = /** @class */ (function () {
     //метод add для добавления нового Storage на весы;
     Scales.prototype.add = function (prod) {
         this.arrayOfStorages.push(prod);
-        console.log("add", this.arrayOfStorages);
     };
     //метод getSumScale для получения суммарного веса добавленных Продуктов;
     Scales.prototype.getSumScale = function () {
@@ -62,25 +61,17 @@ var ScalesStorageEngineArray = /** @class */ (function () {
 }());
 var ScalesStorageEngineLocalStorage = /** @class */ (function () {
     function ScalesStorageEngineLocalStorage() {
-        this.listOfProductsLS = [];
     }
-    ScalesStorageEngineLocalStorage.prototype.createArray = function () {
-        var aaa = localStorage.setItem('listOfProductsLS', JSON.stringify(this.listOfProductsLS));
-        console.log("listOfProductsLS111: ", localStorage.getItem('aaa'));
-    };
     ScalesStorageEngineLocalStorage.prototype.addItem = function (item) {
-        var listOfProductsLS = JSON.parse(localStorage.getItem("listOfProductsLS"));
-        console.log("listOfProductsLS222: ", listOfProductsLS);
-        listOfProductsLS.push(item);
-        localStorage.setItem('listOfProductsLS', JSON.stringify(listOfProductsLS));
+        localStorage.setItem(item.getName(), JSON.stringify(item));
     };
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
-        var listOfProductsLS = JSON.parse(localStorage.getItem("listOfProductsLS"));
-        return this.listOfProductsLS[index];
+        var elementName = localStorage.key(index);
+        var rawProduct = JSON.parse(localStorage.getItem(elementName));
+        return new Product(rawProduct.name, rawProduct.scale);
     };
     ScalesStorageEngineLocalStorage.prototype.getCount = function () {
-        var listOfProductsLS = JSON.parse(localStorage.getItem("listOfProductsLS"));
-        return this.listOfProductsLS.length;
+        return localStorage.length;
     };
     return ScalesStorageEngineLocalStorage;
 }());
@@ -95,6 +86,7 @@ lykoshko.addItem(apple3);
 scales.add(lykoshko);
 scales.getSumScale();
 scales.getNameList();
+localStorage.clear();
 var scales2 = new Scales();
 var orange = new Product("orange red", 100);
 var orange2 = new Product("orange green", 900);
@@ -103,6 +95,7 @@ var lykoshko2 = new ScalesStorageEngineLocalStorage();
 lykoshko2.addItem(orange);
 lykoshko2.addItem(orange2);
 lykoshko2.addItem(orange3);
-scales.getSumScale();
-scales.getNameList();
+scales2.add(lykoshko2);
+scales2.getSumScale();
+scales2.getNameList();
 //# sourceMappingURL=app.js.map
