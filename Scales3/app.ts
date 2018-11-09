@@ -5,18 +5,16 @@ interface IStorageEngine{
     getCount():number;
 } 
 class Scales<StorageEngine extends IStorageEngine>{
-    arrayOfStorages:StorageEngine[] = [];
+    storage:StorageEngine;
     //метод add для добавления нового Storage на весы;
     add(prod:StorageEngine):void{
-        this.arrayOfStorages.push(prod);
+        this.storage = prod;
     } 
     //метод getSumScale для получения суммарного веса добавленных Продуктов;
     getSumScale():number{
         let sumScale = 0;
-        for(let i = 0; i < this.arrayOfStorages.length; i++){
-            for(let j = 0; j < this.arrayOfStorages[i].getCount(); j++){
-                sumScale += this.arrayOfStorages[i].getItem(j).getScale();
-            }
+        for(let j = 0; j < this.storage.getCount(); j++){
+            sumScale += this.storage.getItem(j).getScale();
         }
         console.log("sumScale: ", sumScale);
         return sumScale;
@@ -24,10 +22,8 @@ class Scales<StorageEngine extends IStorageEngine>{
     //метод getNameList для получения списка наименований добавленных Продуктов в виде массива.
     getNameList():string[]{
         let listOfNames = [];
-        for(let i = 0; i < this.arrayOfStorages.length; i++){
-            for(let j = 0; j < this.arrayOfStorages[i].getCount(); j++){
-                listOfNames.push(this.arrayOfStorages[i].getItem(j).getName());
-            }
+        for(let j = 0; j < this.storage.getCount(); j++){
+            listOfNames.push(this.storage.getItem(j).getName());
         }
         console.log("listOfNames: ", listOfNames);
         return listOfNames;
@@ -69,21 +65,25 @@ class ScalesStorageEngineArray implements IStorageEngine{
 class ScalesStorageEngineLocalStorage implements IStorageEngine {
 
     addItem(item:Product):void {
-        localStorage.setItem(item.getName(), JSON.stringify(item));
+        let arrayOfProducts:Product[] = [];
+        arrayOfProducts = JSON.parse(localStorage.getItem("Products"));
+        if(arrayOfProducts == null){
+            arrayOfProducts = [];
+        }
+        arrayOfProducts.push(item);
+        localStorage.setItem("Products", JSON.stringify(arrayOfProducts));
     }
 
     getItem(index:number):Product {
-        let elementName = localStorage.key(index);
-        let rawProduct = JSON.parse(localStorage.getItem(elementName));
-        return new Product(rawProduct.name, rawProduct.scale);
+        let rawProducts = JSON.parse(localStorage.getItem("Products"));
+        return new Product(rawProducts[index].name, rawProducts[index].scale) ;
     }
 
     getCount():number {
-        return localStorage.length;
+        return JSON.parse(localStorage.getItem("Products")).length;
     }
 
 }
-
 
 
 let scales = new Scales<ScalesStorageEngineArray>();
